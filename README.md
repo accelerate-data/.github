@@ -1,15 +1,13 @@
-# .github
-# 🚀 Accelerate Data — VibeData Platform
+# Accelerate Data
 
 > **Governed data at the speed of AI.**
 
 Accelerate Data builds **VibeData**, an Azure-native data and AI platform that transforms business intent into governed, validated, and deployable data products.
-
 VibeData unifies **governance**, **automation**, and **observability** into a single control fabric for the modern data stack.
 
 ---
 
-## 🧩 Platform Overview
+## Platform Overview
 
 ### **1. Control Plane**
 Govern and provision workspaces with policy-as-code.  
@@ -26,7 +24,7 @@ Assurance Agents detect, triage, and remediate issues via Azure Monitor, Log Ana
 
 ---
 
-## 🧱 Core Principles
+## Core Principles
 
 - **Governance as Code** — All policies, access, and quality checks versioned and enforced via Git.  
 - **Observability by Default** — Unified telemetry (logs, metrics, traces) using OpenTelemetry and Azure Monitor.  
@@ -35,7 +33,7 @@ Assurance Agents detect, triage, and remediate issues via Azure Monitor, Log Ana
 
 ---
 
-## 🧠 Architecture Snapshot
+## Architecture Snapshot
 
 ```text
 Marketplace → Control Plane → Workspaces (Studio + Assurance Agents)
