@@ -1,7 +1,7 @@
 # Accelerate Data - Governed data at the speed of AI.
 
-Accelerate Data builds **VibeData**, an Azure-native data and AI platform that transforms business intent into governed, validated, and deployable data products.
-VibeData unifies **governance**, **automation**, and **observability** into a single control fabric for the modern data stack.
+Accelerate Data builds **VibeData**. 
+Vibedata is an agentic platform that turns business questions into reliable, production-ready data in hours. It uses domain skills to capture tribal knowledge, MCP for connectivity, and an agentic workflow that keeps you in control.
 
 ---
 
