@@ -99,5 +99,3 @@ All repositories follow a consistent naming pattern to organize code, specificat
   - `vd-docs-internal` (internal documentation)
   - `vd-skills-community` (open-source skills)
   - `vd-skills-proprietary` (proprietary skills)
-
----
