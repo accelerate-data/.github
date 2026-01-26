@@ -72,3 +72,32 @@ VibeData provides the data foundation (pipelines, quality, transformations) that
 **vs Status Quo (ChatGPT/Claude):** End-to-end workflow vs fragmented copy-paste  
 **vs dbt Cloud:** Intent-to-production vs code generation only  
 **vs Fabric Copilot:** Proactive requirements crystallization vs reactive code help  
+
+---
+
+## Repository Naming Convention
+
+All repositories follow a consistent naming pattern to organize code, specifications, infrastructure, and experimental work:
+
+| Prefix | Purpose | Example |
+|--------|---------|---------|
+| `vd-specs-<name>` | Specifications and requirements | `vd-specs-foundation` |
+| `vd-mockup-<name>` | UI/UX mockups and designs | `vd-mockup-studio` |
+| `vd-docs-<name>` | Documentation sites and knowledge bases | `vd-docs-community`, `vd-docs-internal` |
+| `vd-<name>` | Production code repositories for applications (API, Backend, UI, Data platform) | `vd-studio`, `vd-dbt-fabric-spark` |
+| `vd-infra-<name>` | Infrastructure as Code (Terraform, Bicep, etc.) | `vd-infra-azure` |
+| `vd-skills-<name>` | Domain skills and capabilities | `vd-skills-community`, `vd-skills-proprietary` |
+| `vd-agent-<name>` | Individual agent implementations | `vd-agent-orchestrator` |
+| `vd-template-<name>` | Standards, templates, and scaffolding | `vd-template-service` |
+| `scratch-<name>` | Experimental and ephemeral work | `scratch-llm-evaluation` |
+
+### Public vs Private Repositories
+
+- **Default:** All repositories are private unless explicitly made public
+- **Semantic naming:** When both public and private versions exist, use descriptive suffixes:
+  - `vd-docs-community` (public documentation)
+  - `vd-docs-internal` (internal documentation)
+  - `vd-skills-community` (open-source skills)
+  - `vd-skills-proprietary` (proprietary skills)
+
+---
