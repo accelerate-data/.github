@@ -27,12 +27,6 @@ org repo that does not define its own:
 2. Check templates in `.github/` for consistency with the standards.
 3. Review `profile/README.md` for the public-facing org description.
 
-## How to Activate
-
-1. Go to the repo's **Settings > General > Repository name**.
-2. Rename from `.github-draft` to `.github`.
-3. Confirm the rename. GitHub begins applying defaults immediately.
-
 ## Owners
 
 | GitHub Handle | Name |
