@@ -1,14 +1,11 @@
-# .github-draft -- Accelerate Data Org Defaults
+# Accelerate Data Org Defaults
 
 This repository contains **org-wide standards, templates, and defaults** for all
 [Accelerate Data](https://github.com/accelerate-data) repositories.
 
 ## Status: Draft
 
-This repo is named `.github-draft` so it has **no effect** on the organization.
-Once reviewed and approved, rename it to `.github` to activate it.
-
-When activated, GitHub automatically applies its contents as defaults to every
+GitHub automatically applies its contents as defaults to every
 org repo that does not define its own:
 
 - **Issue templates** and **PR template** -- consistent contribution workflow
