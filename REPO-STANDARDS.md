@@ -9,7 +9,7 @@ standards before its first production merge.
 ## Table of Contents
 
 1. [CI/CD Baseline](#1-cicd-baseline)
-2. [Branch Protection](#2-branch-protection)
+2. [Branch Rulesets](#2-branch-rulesets)
 3. [Branch Naming and Strategy](#3-branch-naming-and-strategy)
 4. [Documentation](#4-documentation)
 5. [AI Agent Integration](#5-ai-agent-integration)
@@ -55,23 +55,33 @@ Dependabot PRs that pass CI are auto-merged for patch and minor updates.
 
 ---
 
-## 2. Branch Protection
+## 2. Branch Rulesets
 
-The `main` branch must have the following protections enabled:
+The `main` branch is protected via a GitHub repository ruleset (not legacy branch protection). The ruleset named **`main`** targets `refs/heads/main` and is set to **active** enforcement.
 
-| Setting | Value |
-|---------|-------|
-| Require pull request before merging | Yes |
-| Required approving reviews | 1 minimum |
-| Required status checks | CI, CodeQL |
-| Require conversation resolution | Yes |
-| Dismiss stale pull request reviews | Yes |
-| Allow force pushes | No |
-| Allow deletions | No |
-| Restrict direct pushes | Admin only |
+### Rules
 
-No exceptions. If a hotfix must bypass review, it still requires a PR and one
-admin approval.
+| Rule | Configuration |
+|------|---------------|
+| Deletion | Blocked |
+| Force push | Blocked (non-fast-forward) |
+| Pull request required | Yes — 1 required approving review |
+| Dismiss stale reviews on push | Yes |
+| Require code owner review | Yes |
+| Require last push approval | No |
+| Require conversation resolution | No |
+| Allowed merge methods | Merge, squash, rebase |
+| Required status checks (strict) | `claude-review`, `dependency-review`, `codeql` |
+| Code scanning | CodeQL — high-or-higher security alerts, errors threshold |
+| Code quality | Errors severity |
+
+### Bypass
+
+Organization admins are exempt from all rules.
+
+No other bypass actors. If a hotfix must land quickly, it still requires a PR
+and one admin approval — an org admin can merge without waiting for status
+checks if necessary.
 
 ---
 
@@ -342,7 +352,7 @@ Add path-specific owners for specialized areas:
 
 Use this checklist when creating a new repo or auditing an existing one.
 
-- [ ] Branch protection enabled on `main` (per Section 2)
+- [ ] Branch ruleset `main` created and active (per Section 2)
 - [ ] Auto-delete branches after merge enabled
 - [ ] Dependabot configured and auto-merge enabled
 - [ ] Required files present: `README.md`, `CLAUDE.md`, `AGENTS.md`,
