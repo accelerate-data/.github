@@ -70,7 +70,7 @@ The `main` branch is protected via a GitHub repository ruleset (not legacy branc
 | Require code owner review | Yes |
 | Require last push approval | No |
 | Require conversation resolution | No |
-| Allowed merge methods | Merge, squash, rebase |
+| Allowed merge methods | Squash |
 | Required status checks (strict) | `claude-review`, `dependency-review`, `codeql` |
 | Code scanning | CodeQL — high-or-higher security alerts, errors threshold |
 | Code quality | Errors severity |
