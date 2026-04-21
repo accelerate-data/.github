@@ -1,27 +1,36 @@
-# Accelerate Data - Governed data at the speed of AI.
+# Accelerate Data Org Defaults
 
-Accelerate Data builds **VibeData**. 
-Vibedata is an agentic platform that turns business questions into reliable, production-ready data in hours. It uses domain skills to capture tribal knowledge, MCP for connectivity, and an agentic workflow that keeps you in control.
+This repository contains **org-wide standards, templates, and defaults** for all
+[Accelerate Data](https://github.com/accelerate-data) repositories.
 
----
+## Status: Draft
 
-## Platform Overview
+GitHub automatically applies its contents as defaults to every
+org repo that does not define its own:
 
-### **1. Foundation**
-Foundation Service is the control plane for Vibedata Azure Managed Applications — a publisher-side orchestrator combined with managed-app-side platform services that handle instance lifecycle, component updates, and operational metadata.
+- **Issue templates** and **PR template** -- consistent contribution workflow
+- **CONTRIBUTING.md** -- contribution guidelines
+- **SECURITY.md** -- vulnerability reporting process
+- **Org profile** (`profile/README.md`) -- displayed on the org's GitHub page
 
-### **2. Studio**
-Turn business intent into data products.  
-Studio captures business questions and automatically generates dbt transformations, semantic models, and data contracts — guiding users from **Intent → Plan → Validation → Deploy**.
+## Contents
 
-### **3. Monitor**
-Deliver autonomous observability and self-healing for pipelines, data quality, and infrastructure.
+| Path | Purpose |
+|------|---------|
+| `REPO-STANDARDS.md` | Canonical reference for CI, branching, testing, security, and governance |
+| `.github/` | PR template, issue templates, workflow references |
+| `profile/README.md` | Public org profile shown at github.com/accelerate-data |
 
----
+## How to Review
 
-## Core Principles
+1. Read **REPO-STANDARDS.md** first -- it defines every standard.
+2. Check templates in `.github/` for consistency with the standards.
+3. Review `profile/README.md` for the public-facing org description.
 
-- **Secure** — Deployed and operated within the customer’s Azure tenant with full isolation and compliance.
-- **Agentic Workflows** — Agents use skills and tools to deliver outcomes. 
-- **Governance as Code** — All policies, access, and quality checks versioned and enforced via Git.  
-- **Observability by Default** — Unified telemetry (logs, metrics, traces) using OpenTelemetry and Azure Monitor.  
+## Owners
+
+| GitHub Handle | Name |
+|---------------|------|
+| @admiraldata | Shwetank Sheel |
+| @hbanerjee74 | Hemanta Banerjee |
+| @ukakkad | Umesh Kakkad |
