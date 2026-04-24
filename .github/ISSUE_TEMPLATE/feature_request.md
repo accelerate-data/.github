@@ -6,14 +6,18 @@ labels: enhancement
 assignees: ""
 ---
 
-**Problem statement**
+## Problem statement
+
 Describe the problem or limitation this feature would address.
 
-**Proposed solution**
+## Proposed solution
+
 Describe the solution you would like to see.
 
-**Alternatives considered**
+## Alternatives considered
+
 List any alternative approaches you have considered and why they fall short.
 
-**Additional context**
+## Additional context
+
 Any other details, mockups, or references that support this request.
