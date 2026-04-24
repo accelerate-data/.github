@@ -154,9 +154,10 @@ docs/
 
 ### README-First Principle
 
-Every directory must have a README explaining what it contains and why. If
-someone cannot understand a directory from its README alone, the documentation
-is incomplete.
+Documentation directories that are expected to contain multiple child folders
+must have a README explaining what the directory contains and why. If someone
+cannot understand an indexed documentation directory from its README alone, the
+documentation is incomplete.
 
 ### Docs Site
 
