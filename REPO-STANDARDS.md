@@ -23,30 +23,29 @@ standards before its first production merge.
 
 ## 1. CI/CD Baseline
 
-### Required Workflows (every repo)
+### Required Automation (every repo)
 
-| Workflow | Trigger | Purpose |
-|----------|---------|---------|
+| File | Trigger | Purpose |
+| --- | --- | --- |
 | `ci.yml` | Push to `main`, PR to `main` | Lint, typecheck, unit tests |
 | `claude.yml` | PR events | Claude Code integration |
 | `claude-code-review.yml` | PR opened/updated | AI-powered PR review |
 | `codeql.yml` | Push to `main`, PR to `main`, weekly schedule | Static analysis (SAST) |
 | `dependency-review.yml` | PR to `main` | Block PRs that introduce vulnerable dependencies |
 | `release.yml` | Push tag `v*` | Semver release with changelog generation |
-| `dependabot.yml` | Dependabot schedule | Automated dependency updates |
+| `.github/dependabot.yml` | Dependabot schedule | Automated dependency updates |
 
 Dependabot PRs that pass CI are auto-merged for patch and minor updates.
 
 ### Optional Workflows (by repo type)
 
 | Workflow | When to Add |
-|----------|-------------|
+| --- | --- |
 | `docs.yml` | Repos with a docs site (VitePress, Docusaurus) |
-| `ephemeral.yml` | Repos using preview/ephemeral environments |
 | `container-scan.yml` | Repos that build container images |
 | `nightly-cleanup.yml` | Repos with generated artifacts or temp resources |
 
-### Rules
+### CI/CD Rules
 
 - CI runs on **push to `main`** and **PR to `main`**.
 - All CI checks **gate merge** -- a PR cannot merge with failing checks.
@@ -57,19 +56,18 @@ Dependabot PRs that pass CI are auto-merged for patch and minor updates.
 
 ## 2. Branch Rulesets
 
-The `main` branch is protected via a GitHub repository ruleset (not legacy branch protection). The ruleset named **`main`** targets `refs/heads/main` and is set to **active** enforcement.
+The `main` branch is protected via a GitHub repository ruleset. The ruleset named **`main`** targets `refs/heads/main` and is set to **active** enforcement.
 
 ### Rules
 
 | Rule | Configuration |
-|------|---------------|
+| --- | --- |
 | Deletion | Blocked |
 | Force push | Blocked (non-fast-forward) |
 | Pull request required | Yes — 1 required approving review |
 | Dismiss stale reviews on push | Yes |
 | Require code owner review | Yes |
 | Require last push approval | No |
-| Require conversation resolution | No |
 | Allowed merge methods | Squash |
 | Required status checks (strict) | `claude-review`, `dependency-review`, `codeql` |
 | Code scanning | CodeQL — high-or-higher security alerts, errors threshold |
@@ -90,13 +88,13 @@ checks if necessary.
 ### Branch Prefixes
 
 | Prefix | Use Case | Example |
-|--------|----------|---------|
+| --- | --- | --- |
 | `feature/` | New functionality | `feature/VD-123-pipeline-builder` |
 | `fix/` | Bug fixes | `fix/VD-456-null-pointer-transform` |
 | `chore/` | Maintenance, config | `chore/upgrade-node-22` |
 | `docs/` | Documentation only | `docs/api-reference-update` |
 | `refactor/` | Code restructuring | `refactor/extract-auth-module` |
-| `dependabot/*` | Automated dependency PRs | `dependabot/npm_and_yarn/lodash-4.17.21` |
+| `dependabot/*` | Automated dependency PRs | `dependabot/npm/lodash-4.17.21` |
 | `release/` | Release preparation | `release/v2.1.0` |
 
 ### Doc Branches
@@ -111,7 +109,9 @@ Branches prefixed with `docs/` follow a lighter CI path:
 
 Never switch branches on the main working copy. Every feature gets its own worktree — an isolated copy of the codebase with its own branch, files, and environment.
 
-For setup commands, path conventions, parallel execution patterns, and lifecycle management, see the canonical guide: [guides/worktree-workflow.md](https://github.com/accelerate-data/vd-docs-engineering-framework/blob/main/guides/worktree-workflow.md)
+For setup commands, path conventions, parallel execution patterns, and
+lifecycle management, see the canonical guide:
+[guides/worktree-workflow.md](https://github.com/accelerate-data/engineering-framework/blob/main/guides/worktree-workflow.md).
 
 ### PR Format
 
@@ -130,7 +130,7 @@ For setup commands, path conventions, parallel execution patterns, and lifecycle
 ### Required Files (every repo)
 
 | File | Purpose |
-|------|---------|
+| --- | --- |
 | `README.md` | Project overview, setup, usage |
 | `CLAUDE.md` | AI agent instructions and constraints |
 | `AGENTS.md` | Agent definitions and capabilities |
@@ -142,11 +142,11 @@ For setup commands, path conventions, parallel execution patterns, and lifecycle
 
 ### Documentation Directory Structure
 
-```
+```text
 docs/
   design/          # Architecture and design decision records
-  specs/           # Formal specifications (EARS syntax)
-  requirements/    # Product and technical requirements
+  functional/      # Functional specifications
+  plans/           # Implementation plans
   runbooks/        # Operational procedures
   user-guide/      # End-user documentation
   reference/       # API reference, configuration reference
@@ -174,7 +174,7 @@ documentation site. Source files live in `docs/` and deploy via `docs.yml`.
 ### Plugins
 
 | Plugin | Skills |
-|--------|--------|
+| --- | --- |
 | `doc-skills` | `create-spec`, `write-design-doc`, `write-user-guide` |
 | `reporting-skills` | `package-for-review` |
 
@@ -190,7 +190,7 @@ with the same rigor as code changes.
 
 ### Required `.claude/` Structure
 
-```
+```text
 .claude/
   settings.json        # Tool permissions, MCP config
   rules/
@@ -205,7 +205,7 @@ with the same rigor as code changes.
 ### Required Root Files
 
 | File | Required When |
-|------|---------------|
+| --- | --- |
 | `CLAUDE.md` | Always |
 | `AGENTS.md` | Always |
 | `repo-map.json` | Repos with 50+ files |
@@ -215,23 +215,27 @@ with the same rigor as code changes.
 
 Every change follows the Linear ticket lifecycle:
 
-1. `/create-linear-issue` -- create the ticket
-2. `/implement-linear-issue VD-XXX` -- implement against the ticket
-3. `/close-linear-issue VD-XXX` -- close after merge
+1. `/creating-linear-issue` -- create the ticket
+2. `/implementing-linear-issue VD-XXX` -- implement against the ticket
+3. `/raising-linear-pr VD-XXX` — raise PR for the issue
+4. `/closing-linear-issue VD-XXX` — close linear issue
 
 ### Plugin Matrix
 
 | Scope | Plugin | Skills |
-|-------|--------|--------|
-| All repos | `engineering-skills` | `adversarial-review`, `raising-linear-pr`, `implementing-linear-issue` |
-| All repos | `doc-skills` | `create-spec`, `write-design-doc`, `write-user-guide` |
+| --- | --- | --- |
+| All repos | `engineering-skills` | `creating-linear-issue`, `implementing-linear-issue`, `raising-linear-pr`, `closing-linear-issue`, `adversarial-review` |
 | AI/LLM repos | `promptfoo` | `eval`, `regression`, `red-teaming` |
 | Backend repos | `backend-skills` | Coding standards enforcement |
 | Frontend repos | `frontend-skills` | React, shadcn/ui conventions |
-| TDD workflows | `superpowers` | TDD workflow, debugging |
+| All repos | `superpowers` | TDD workflow, debugging |
 | Review workflows | `reporting-skills` | `package-for-review` |
 
-Accelerate Data's own skills are packaged and maintained in the `plugins/vd-engineering/` directory of [vd-docs-engineering-framework](https://github.com/accelerate-data/vd-docs-engineering-framework). The [plugin-marketplace](https://github.com/accelerate-data/plugin-marketplace) lists all available plugins.
+Accelerate Data's own skills are packaged and maintained in the
+[engineering-framework](https://github.com/accelerate-data/engineering-framework)
+repository. The
+[plugin-marketplace](https://github.com/accelerate-data/plugin-marketplace)
+lists all available plugins.
 
 ---
 
@@ -240,14 +244,14 @@ Accelerate Data's own skills are packaged and maintained in the `plugins/vd-engi
 ### Tooling by Language
 
 | Tool Category | TypeScript | Python |
-|---------------|-----------|--------|
+| --- | --- | --- |
 | Linter | ESLint (flat config) | Ruff |
 | Formatter | Prettier | Ruff / Black |
 | Type checker | `tsc --noEmit` | mypy / pyright |
 | Pre-commit | Husky + lint-staged | `.githooks/pre-commit` |
 | Markdown lint | markdownlint | markdownlint |
 
-### Rules
+### Code Quality Rules
 
 Every repo must have:
 
@@ -263,7 +267,7 @@ Every repo must have:
 ### Test Tiers
 
 | Tier | Requirement | Scope |
-|------|-------------|-------|
+| --- | --- | --- |
 | Unit | Required | All repos |
 | Integration | Required | Backend and API repos |
 | E2E (Playwright) | Recommended | Repos with a UI |
@@ -290,10 +294,10 @@ Complex repos should include a `TEST_MANIFEST.md` documenting:
 ### Required for All Repos
 
 | Item | Purpose |
-|------|---------|
+| --- | --- |
 | `codeql.yml` | Static analysis on every PR and weekly |
 | `dependency-review.yml` | Block vulnerable dependency introductions |
-| `dependabot.yml` + auto-merge | Keep dependencies current |
+| `.github/dependabot.yml` + auto-merge | Keep dependencies current |
 | `.gitleaks.toml` | Prevent secret leaks in commits |
 | `.env.example` | Document required env vars (never commit `.env`) |
 | `SECURITY.md` | Vulnerability disclosure process |
@@ -302,11 +306,11 @@ Complex repos should include a `TEST_MANIFEST.md` documenting:
 ### Container Repos (additional)
 
 | Item | Purpose |
-|------|---------|
+| --- | --- |
 | `container-scan.yml` | Scan images for vulnerabilities on build |
 | `.semgrepignore` | Semgrep exclusion rules |
 
-### Rules
+### Security Rules
 
 - Never commit `.env` files. Use `.env.example` with placeholder values.
 - Secrets must be stored in GitHub Secrets or a vault, never in code.
@@ -320,16 +324,16 @@ Complex repos should include a `TEST_MANIFEST.md` documenting:
 
 Every repo must have a `.github/CODEOWNERS` file with at minimum:
 
-```
-* @accelerate-data/core-team
+```text
+* @accelerate-data/vibedata-engineering
 ```
 
 Add path-specific owners for specialized areas:
 
-```
+```text
 /src/auth/    @admiraldata
-/docs/        @accelerate-data/docs-team
-/infra/       @accelerate-data/platform-team
+/docs/        @accelerate-data/vibedata-engineering
+/infra/       @accelerate-data/vibedata-engineering
 ```
 
 ### PR Process
@@ -338,7 +342,7 @@ Add path-specific owners for specialized areas:
 2. PR must link a **Linear ticket** (`Fixes VD-XXX` in the body).
 3. AI review (`claude-code-review.yml`) runs automatically.
 4. At least **one human review** is required.
-5. Merge strategy: **squash merge** to keep `main` history clean.
+5. Merge strategy: **squash merge by default** to keep `main` history clean.
 
 ### Release Process
 
@@ -354,7 +358,7 @@ Use this checklist when creating a new repo or auditing an existing one.
 
 - [ ] Branch ruleset `main` created and active (per Section 2)
 - [ ] Auto-delete branches after merge enabled
-- [ ] Dependabot configured and auto-merge enabled
+- [ ] `.github/dependabot.yml` configured and auto-merge enabled
 - [ ] Required files present: `README.md`, `CLAUDE.md`, `AGENTS.md`,
       `CONTRIBUTING.md`, `SECURITY.md`
 - [ ] `.github/CODEOWNERS` created with minimum ownership rule

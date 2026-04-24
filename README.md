@@ -3,10 +3,10 @@
 This repository contains **org-wide standards, templates, and defaults** for all
 [Accelerate Data](https://github.com/accelerate-data) repositories.
 
-## Status: Draft
+## Status
 
-GitHub automatically applies its contents as defaults to every
-org repo that does not define its own:
+This is the active organization defaults repository. GitHub automatically
+applies its contents as defaults to every org repo that does not define its own:
 
 - **Issue templates** and **PR template** -- consistent contribution workflow
 - **CONTRIBUTING.md** -- contribution guidelines
@@ -16,9 +16,9 @@ org repo that does not define its own:
 ## Contents
 
 | Path | Purpose |
-|------|---------|
+| --- | --- |
 | `REPO-STANDARDS.md` | Canonical reference for CI, branching, testing, security, and governance |
-| `.github/` | PR template, issue templates, workflow references |
+| `.github/` | PR template, issue templates, and code owners |
 | `profile/README.md` | Public org profile shown at github.com/accelerate-data |
 
 ## How to Review
@@ -30,7 +30,7 @@ org repo that does not define its own:
 ## Owners
 
 | GitHub Handle | Name |
-|---------------|------|
+| --- | --- |
 | @admiraldata | Shwetank Sheel |
 | @hbanerjee74 | Hemanta Banerjee |
 | @ukakkad | Umesh Kakkad |
